@@ -26,3 +26,4 @@ class MyUserSerializer(serializers.ModelSerializer):
     #def create_user(self, validated_data):
     #    user = MyUser.objects.create_atrisk(validated_data['user'], validated_data['date'])
     #    return user
+
