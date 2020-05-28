@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'codeLabsApp.MyUser'
+
 
 # Application definition
 
@@ -83,9 +85,17 @@ DATABASES = {
 		'PASSWORD': '', # In my case I didn't place any password
 		'HOST': 'localhost',   # Or the IP where the DB is hosted
 		'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'", # https://django-mysql.readthedocs.io/en/latest/checks.html#django-mysql-w001-strict-mode
+        },
 	}
 }
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
