@@ -45,7 +45,7 @@ class MyUser(AbstractBaseUser):
         return str(self.user_id) + " (%s)" % str(self.username)
 
     def has_perm(self, perm, obj=None):
-        return self.user_type == 0
+        return True
 
     def has_module_perms(self, app_label):
         return True
