@@ -29,6 +29,9 @@ ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'codeLabsApp.MyUser'
 
+SIMPLE_JWT = {
+    'USER_ID_FIELD': 'user_id'
+}
 
 # Application definition
 
@@ -80,7 +83,7 @@ WSGI_APPLICATION = 'django_server.wsgi.application'
 DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.mysql', 
-		'NAME': 'codeLabs_db',
+		'NAME': 'codelabs',
 		'USER': 'root',
 		'PASSWORD': '', # In my case I didn't place any password
 		'HOST': 'localhost',   # Or the IP where the DB is hosted

@@ -8,22 +8,23 @@ from django.contrib.auth.hashers import make_password
 FROM: USER APP
 '''
 class MyUserSerializer(serializers.ModelSerializer):
-    user = serializers.CharField(
+    username = serializers.CharField(
             required=True,
             validators=[UniqueValidator(queryset=MyUser.objects.all())],
             min_length=5,
             max_length=20
-            )
-    date = serializers.DateTimeField(
+            ),
+    password = serializers.CharField(
             required=True,
-            input_formats=['%d-%m-%Y']
-    )
-
+            max_length=256
+            )
+    
     class Meta:
         model = MyUser
-        fields = ('user', 'date')
-
-    #def create_user(self, validated_data):
-    #    user = MyUser.objects.create_atrisk(validated_data['user'], validated_data['date'])
-    #    return user
+        fields = ('username', 'password')
+        
+    def create(self, validated_data):
+        password = make_password(validated_data['password'])
+        user = MyUser.objects.create_user(validated_data['username'], password)
+        return user
 

@@ -4,13 +4,27 @@ import datetime
 # Create your models here.
 
 class MyUserManager(BaseUserManager):
-    def create_user(user, date):
-        user = model(
-            user=user,
-            date=date
+    def create_user(self, username, password, **extra_fields):
+        user = self.model(
+            username=username
         )
-        user.save(using=_db)
+        user.is_staff=True
+        user.is_active=True
+        user.is_superuser=True
+        user.set_password(password)
+        user.save(using=self._db)
         return user
+
+    def create_superuser(self, username, password, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser=True.')
+
+        return self.create_user(username, password, **extra_fields)    
 
 class MyUser(AbstractBaseUser):
     objects = MyUserManager()
@@ -19,13 +33,19 @@ class MyUser(AbstractBaseUser):
         db_table = 'user_entity'
 
     user_id = models.AutoField(primary_key=True, db_column='userId')
-    user = models.CharField(db_column='user', unique=True, max_length=20)
-    date = models.DateTimeField(db_column='date', default=datetime.date.today)
-    password = None
-    last_login = None
+    username = models.CharField(db_column='username', unique=True, max_length=20)
+    password = models.CharField(db_column='userPassword', max_length=256)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=True)
+    is_superuser = models.BooleanField(default=True)
 
-    USERNAME_FIELD = 'user'
-    REQUIRED_FIELDS = ['date']
+    USERNAME_FIELD = 'username'
 
     def __str__(self):
-        return str(self.user_id) + " (%s)" % str(self.user)
+        return str(self.user_id) + " (%s)" % str(self.username)
+
+    def has_perm(self, perm, obj=None):
+        return self.user_type == 0
+
+    def has_module_perms(self, app_label):
+        return True
