@@ -30,7 +30,8 @@ ALLOWED_HOSTS = []
 AUTH_USER_MODEL = 'codeLabsApp.MyUser'
 
 SIMPLE_JWT = {
-    'USER_ID_FIELD': 'user_id'
+    'USER_ID_FIELD': 'user_id',
+    'ALGORITHM': 'HS512',
 }
 
 # Application definition

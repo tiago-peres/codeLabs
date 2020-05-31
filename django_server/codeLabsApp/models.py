@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-import datetime
+
 # Create your models here.
 
 class MyUserManager(BaseUserManager):
