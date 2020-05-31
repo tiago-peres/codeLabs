@@ -3,6 +3,7 @@ from codeLabsApp import views
 from django.conf.urls import url
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from codeLabsApp.views import MyTokenObtainPairView
 
 router = DefaultRouter()
 
@@ -13,7 +14,8 @@ urlpatterns = [
     
     
     # JWT Token
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain'),
+    #path('api/token/', TokenObtainPairView.as_view(), name='token_obtain'),
+    path('api/token/', MyTokenObtainPairView.as_view(), name='token_obtain'),
     # Get a new token before the old expires.
     path('api/token/refresh/', TokenRefreshView.as_view, name='token_refresh'),
     
