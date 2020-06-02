@@ -85,8 +85,8 @@ DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.mysql', 
 		'NAME': 'codelabs',
-		'USER': 'root',
-		'PASSWORD': '', # In my case I didn't place any password
+		'USER': 'admin', # In Ubuntu
+		'PASSWORD': 'password', # In Ubuntu
 		'HOST': 'localhost',   # Or the IP where the DB is hosted
 		'PORT': '3306',
         'OPTIONS': {
