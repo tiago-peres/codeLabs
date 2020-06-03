@@ -100,14 +100,16 @@ class MyUserTest(APITestCase):
         '''
         Ensure we can't create a user with preexisting username.
         '''
+        existed_username = "testing"
+        password_existed_username = "testssss"
+        existed_user = MyUser.objects.create(username=existed_username,password=password_existed_username)
         data = {
-            'username': 'testing',
-            'password': 'test'
-        }
+                'username': existed_username,
+                'password': 'test'
+                }
 
-        response = self.client.post(self.create_url , data, format='json')
-
+        response = self.client.post(self.create_url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertEqual(MyUser.objects.count(), 1)
+        self.assertEqual(MyUser.objects.count(), 2) # 2 because we create one user with the setUp method
         self.assertEqual(len(response.data['username']), 1)
 
