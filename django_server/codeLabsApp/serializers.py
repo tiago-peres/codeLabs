@@ -12,14 +12,12 @@ FROM: USER APP
 '''
 class MyUserSerializer(serializers.ModelSerializer):
     username = serializers.CharField(
-            required=True,
             validators=[UniqueValidator(queryset=MyUser.objects.all())],
-            min_length=5,
             max_length=20
             ),
     password = serializers.CharField(
-            required=True,
-            max_length=256
+            min_length=4,
+            write_only=True
             )
     
     class Meta:
