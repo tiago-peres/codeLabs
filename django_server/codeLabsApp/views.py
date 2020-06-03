@@ -14,7 +14,9 @@ class RootView(APIView):
         return Response(content)
 
 class MyUserCreate(APIView):
-
+    '''
+    Creates the user.
+    '''
     def post(self, request, format='json'):
         serializer = MyUserSerializer(data=request.data)
         if serializer.is_valid():

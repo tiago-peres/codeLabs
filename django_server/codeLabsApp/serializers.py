@@ -19,7 +19,8 @@ class MyUserSerializer(serializers.ModelSerializer):
             ),
     password = serializers.CharField(
             required=True,
-            max_length=256
+            max_length=256,
+            write_only=True
             )
     
     class Meta:
