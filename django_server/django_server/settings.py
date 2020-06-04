@@ -81,32 +81,35 @@ WSGI_APPLICATION = 'django_server.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {
-# 	'default': {
-# 		'ENGINE': 'django.db.backends.mysql', 
-# 		'NAME': 'codelabs',
-# 		'USER': 'admin', # In Ubuntu
-# 		'PASSWORD': 'password', # In Ubuntu
-# 		'HOST': 'localhost',   # Or the IP where the DB is hosted
-# 		'PORT': '3306',
-#         'OPTIONS': {
-#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'", # https://django-mysql.readthedocs.io/en/latest/checks.html#django-mysql-w001-strict-mode
-#         },
-# 	}
-# }
+##UBUNTU
 DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.mysql', 
-		'NAME': 'codelabs',
-		'USER': 'root',
-		'PASSWORD': '',
-		'HOST': 'localhost',
+		'NAME': 'codeLabs',
+		'USER': 'admin', # In Ubuntu
+		'PASSWORD': 'password', # In Ubuntu
+		'HOST': 'localhost',   # Or the IP where the DB is hosted
 		'PORT': '3306',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'", # https://django-mysql.readthedocs.io/en/latest/checks.html#django-mysql-w001-strict-mode
         },
 	}
 }
+
+##WINDOWS
+# DATABASES = {
+# 	'default': {
+# 		'ENGINE': 'django.db.backends.mysql', 
+# 		'NAME': 'codelabs',
+# 		'USER': 'root',
+# 		'PASSWORD': '',
+# 		'HOST': 'localhost',
+# 		'PORT': '3306',
+#         'OPTIONS': {
+#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'", # https://django-mysql.readthedocs.io/en/latest/checks.html#django-mysql-w001-strict-mode
+#         },
+# 	}
+# }
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
